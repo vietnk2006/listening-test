@@ -1,1 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Listening Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🎧 Listening Test</h1>
 
+    <audio id="audio" controls>
+      <source src="audio/track1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="section">
+      <h2>Part 1 — Trắc nghiệm</h2>
+      <div class="question">
+        <p>1. Where is the man going?</p>
+        <label><input type="radio" name="q1" value="a"> A. The bank</label>
+        <label><input type="radio" name="q1" value="b"> B. The school</label>
+        <label><input type="radio" name="q1" value="c"> C. The hospital</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Part 2 — Điền vào chỗ trống</h2>
+      <div class="question">
+        <p>2. The meeting starts at <input type="text" id="q2" placeholder="..."> o'clock.</p>
+      </div>
+    </div>
+
+    <button onclick="submitTest()">Nộp bài</button>
+    <div id="result"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
