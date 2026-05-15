@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Listening Test 81</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #faf8f3;
+    --accent: #c0392b;
+    --gold: #d4a017;
+    --muted: #6b6b7b;
+    --border: #ddd8cc;
+    --correct: #27ae60;
+    --wrong: #e74c3c;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  header {
+    background: var(--ink);
+    color: white;
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 4px solid var(--accent);
+  }
+  header .badge {
+    background: var(--accent);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 2px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    letter-spacing: 0.5px;
+  }
+  header p { color: #aaa; font-size: 14px; margin-top: 2px; }
+
+  .audio-bar {
+    background: var(--ink);
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid #333;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .audio-bar span { color: #ccc; font-size: 13px; white-space: nowrap; }
+  .audio-bar audio { flex: 1; height: 36px; accent-color: var(--accent); }
+  .audio-note { color: #888; font-size: 12px; font-style: italic; }
+
+  main { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  .part {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 36px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+  .part-header {
+    background: var(--ink);
+    color: white;
+    padding: 16px 28px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .part-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+  }
+  .part-header span { color: #aaa; font-size: 13px; }
+  .part-body { padding: 28px; }
+
+  .instruction {
+    background: #f0eee8;
+    border-left: 3px solid var(--gold);
+    padding: 10px 16px;
+    font-size: 13.5px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .question { margin-bottom: 24px; }
+  .question p { font-size: 15px; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
+  .question p .qnum {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    width: 24px; height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+
+  .options label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14.5px;
+    transition: background 0.15s;
+    border: 1px solid transparent;
+    margin-bottom: 6px;
+  }
+  .options label:hover { background: #f5f3ee; border-color: var(--border); }
+  .options input[type="radio"] { accent-color: var(--accent); width: 16px; height: 16px; }
+
+  .fill-line {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 14.5px;
+    line-height: 2;
+  }
+  .fill-line input[type="text"] {
+    border: none;
+    border-bottom: 2px solid var(--ink);
+    background: transparent;
+    font-size: 14.5px;
+    font-family: 'Source Sans 3', sans-serif;
+    padding: 2px 6px;
+    width: 160px;
+    outline: none;
+    color: var(--ink);
+    transition: border-color 0.2s;
+  }
+  .fill-line input[type="text"]:focus { border-color: var(--accent); }
+  .fill-line .qnum-inline {
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+  }
+
+  .likelihood-grid { display: grid; gap: 10px; }
+  .likelihood-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 14px;
+    background: #fafaf7;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .likelihood-row .place { font-size: 14px; font-weight: 600; }
+  .likelihood-row .place .qnum { font-size: 11px; background: var(--accent); color: white; padding: 2px 7px; border-radius: 10px; margin-right: 6px; }
+  .likelihood-options { display: flex; gap: 6px; }
+  .likelihood-options label {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 13px; cursor: pointer;
+    background: white; border: 1px solid var(--border);
+    padding: 4px 10px; border-radius: 4px;
+    transition: all 0.15s;
+  }
+  .likelihood-options label:hover { border-color: var(--accent); color: var(--accent); }
+  .likelihood-options input[type="radio"] { accent-color: var(--accent); }
+
+  .divider { border: none; border-top: 1px dashed var(--border); margin: 24px 0; }
+
+  .map-placeholder {
+    background: #f5f3ee;
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    padding: 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  .map-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .map-item { display: flex; align-items: center; gap: 10px; }
+  .map-item label { font-size: 13.5px; font-weight: 600; min-width: 32px; color: var(--muted); }
+  .map-item input[type="text"] {
+    flex: 1; border: none; border-bottom: 2px solid var(--ink);
+    background: transparent; font-size: 14px;
+    font-family: 'Source Sans 3', sans-serif;
+    padding: 4px 6px; outline: none; color: var(--ink);
+    transition: border-color 0.2s;
+  }
+  .map-item input[type="text"]:focus { border-color: var(--accent); }
+
+  .table-q { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+  .table-q th { background: var(--ink); color: white; padding: 10px 14px; text-align: left; font-size: 13px; }
+  .table-q td { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .table-q td input[type="text"] {
+    border: none; border-bottom: 2px solid var(--ink); background: transparent;
+    font-size: 14px; font-family: 'Source Sans 3', sans-serif;
+    padding: 2px 6px; outline: none; width: 120px; color: var(--ink);
+  }
+
+  .submit-area { text-align: center; margin-top: 40px; }
+  button#submitBtn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 16px 48px;
+    font-size: 17px;
+    font-family: 'Playfair Display', serif;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 4px 16px rgba(192,57,43,0.3);
+  }
+  button#submitBtn:hover { background: #a93226; transform: translateY(-1px); }
+  button#submitBtn:active { transform: translateY(0); }
+
+  #result-panel {
+    display: none;
+    margin-top: 32px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .result-header {
+    background: var(--ink);
+    color: white;
+    padding: 24px 32px;
+    text-align: center;
+  }
+  .result-header h2 { font-family: 'Playfair Display', serif; font-size: 28px; }
+  .score-big { font-size: 56px; font-family: 'Playfair Display', serif; color: var(--gold); line-height: 1; margin: 8px 0; }
+  .score-label { color: #aaa; font-size: 14px; }
+  .band-score { font-size: 20px; color: var(--gold); margin-top: 8px; }
+
+  .result-body { padding: 28px 32px; }
+  .answer-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 8px 0; border-bottom: 1px solid #f0eee8;
+    font-size: 14px;
+  }
+  .answer-row .qn { font-weight: 700; min-width: 36px; color: var(--muted); }
+  .answer-row .your { flex: 1; }
+  .answer-row .correct-ans { color: var(--correct); font-weight: 600; }
+  .tag-correct { background: #eafaf1; color: var(--correct); font-size: 12px; padding: 2px 8px; border-radius: 10px; font-weight: 700; }
+  .tag-wrong { background: #fdedec; color: var(--wrong); font-size: 12px; padding: 2px 8px; border-radius: 10px; font-weight: 700; }
+  .tag-skip { background: #f0f0f0; color: #888; font-size: 12px; padding: 2px 8px; border-radius: 10px; font-weight: 700; }
+
+  @media (max-width: 600px) {
+    header { padding: 20px 16px; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .audio-bar { padding: 12px 16px; flex-wrap: wrap; }
+    main { padding: 20px 12px 60px; }
+    .part-body { padding: 16px; }
+    .likelihood-row { grid-template-columns: 1fr; }
+    .map-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">IELTS</div>
+  <div>
+    <h1>Listening Test 81</h1>
+    <p>40 Questions &nbsp;·&nbsp; 4 Parts &nbsp;·&nbsp; Academic / General Training</p>
+  </div>
+</header>
+
+<div class="audio-bar">
+  <span>🎧 Audio</span>
+  <audio id="mainAudio" controls>
+    <source src="audio/track1.mp3" type="audio/mpeg">
+    Your browser does not support audio.
+  </audio>
+  <span class="audio-note">Upload your MP3 to the <code>audio/</code> folder</span>
+</div>
+
+<main>
+
+<!-- PART 1 -->
+<div class="part">
+  <div class="part-header">
+    <h2>Part 1</h2>
+    <span>Questions 1–10</span>
+  </div>
+  <div class="part-body">
+
+    <div class="instruction">Questions 1–5 &nbsp;|&nbsp; Choose the correct letter <strong>A, B or C</strong>.</div>
+
+    <div class="question">
+      <p><span class="qnum">1</span> What did Nadia buy at the bookshop?</p>
+      <div class="options">
+        <label><input type="radio" name="q1" value="A"> A &nbsp; A newspaper</label>
+        <label><input type="radio" name="q1" value="B"> B &nbsp; A novel</label>
+        <label><input type="radio" name="q1" value="C"> C &nbsp; Crossword puzzles</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p><span class="qnum">2</span> Thomas is interested in the play about</p>
+      <div class="options">
+        <label><input type="radio" name="q2" value="A"> A &nbsp; A hunter</label>
+        <label><input type="radio" name="q2" value="B"> B &nbsp; A pirate</label>
+        <label><input type="radio" name="q2" value="C"> C &nbsp; A doctor</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p><span class="qnum">3</span> The couple in the bookshop were discussing</p>
+      <div class="options">
+        <label><input type="radio" name="q3" value="A"> A &nbsp; A funny play</label>
+        <label><input type="radio" name="q3" value="B"> B &nbsp; A smooth play</label>
+        <label><input type="radio" name="q3" value="C"> C &nbsp; A boring play</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p><span class="qnum">4</span> How does Nadia want her coffee?</p>
+      <div class="options">
+        <label><input type="radio" name="q4" value="A"> A &nbsp; Sweet and black</label>
+        <label><input type="radio" name="q4" value="B"> B &nbsp; With milk</label>
+        <label><input type="radio" name="q4" value="C"> C &nbsp; Black with no sugar</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p><span class="qnum">5</span> What kind of muffin does Nadia want?</p>
+      <div class="options">
+        <label><input type="radio" name="q5" value="A"> A &nbsp; Plain</label>
+        <label><input type="radio" name="q5" value="B"> B &nbsp; Berry</label>
+        <label><input type="radio" name="q5" value="C"> C &nbsp; Chocolate</label>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="instruction">Questions 6–10 &nbsp;|&nbsp; How likely are Thomas and Nadia to visit the following attractions? Write <strong>A</strong> (definitely visit), <strong>B</strong> (might visit), or <strong>C</strong> (will not visit).</div>
+
+    <div class="likelihood-grid">
+      <div class="likelihood-row">
+        <div class="place"><span class="qnum">6</span> The Tower of London</div>
+        <div class="likelihood-options">
+          <label><input type="radio" name="q6" value="A"> A</label>
+          <label><input type="radio" name="q6" value="B"> B</label>
+          <label><input type="radio" name="q6" value="C"> C</label>
+        </div>
+      </div>
+      <div class="likelihood-row">
+        <div class="place"><span class="qnum">7</span> The Wheel</div>
+        <div class="likelihood-options">
+          <label><input type="radio" name="q7" value="A"> A</label>
+          <label><input type="radio" name="q7" value="B"> B</label>
+          <label><input type="radio" name="q7" value="C"> C</label>
+        </div>
+      </div>
+      <div class="likelihood-row">
+        <div class="place"><span class="qnum">8</span> Westminster</div>
+        <div class="likelihood-options">
+          <label><input type="radio" name="q8" value="A"> A</label>
+          <label><input type="radio" name="q8" value="B"> B</label>
+          <label><input type="radio" name="q8" value="C"> C</label>
+        </div>
+      </div>
+      <div class="likelihood-row">
+        <div class="place"><span class="qnum">9</span> The British Museum</div>
+        <div class="likelihood-options">
+          <label><input type="radio" name="q9" value="A"> A</label>
+          <label><input type="radio" name="q9" value="B"> B</label>
+          <label><input type="radio" name="q9" value="C"> C</label>
+        </div>
+      </div>
+      <div class="likelihood-row">
+        <div class="place"><span class="qnum">10</span> Buckingham Palace</div>
+        <div class="likelihood-options">
+          <label><input type="radio" name="q10" value="A"> A</label>
+          <label><input type="radio" name="q10" value="B"> B</label>
+          <label><input type="radio" name="q10" value="C"> C</label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PART 2 -->
+<div class="part">
+  <div class="part-header">
+    <h2>Part 2</h2>
+    <span>Questions 11–20</span>
+  </div>
+  <div class="part-body">
+
+    <div class="instruction">Questions 11–15 &nbsp;|&nbsp; Write <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.</div>
+
+    <div class="question">
+      <div class="fill-line"><span class="qnum-inline">11</span> What time does the museum open on Thursday morning? &nbsp; <input type="text" id="q11" placeholder="your answer"></div>
+    </div>
+    <div class="question">
+      <div class="fill-line"><span class="qnum-inline">12</span> How much does it cost to hire a multi-media guide? &nbsp; <input type="text" id="q12" placeholder="your answer"></div>
+    </div>
+    <div class="question">
+      <div class="fill-line"><span class="qnum-inline">13</span> Where should visitors leave their coats and bags? &nbsp; <input type="text" id="q13" placeholder="your answer"></div>
+    </div>
+    <div class="question">
+      <div class="fill-line"><span class="qnum-inline">14</span> How much does it cost to leave a package there? &nbsp; <input type="text" id="q14" placeholder="your answer"></div>
+    </div>
+    <div class="question">
+      <div class="fill-line"><span class="qnum-inline">15</span> Where can visitors buy a cup of tea? &nbsp; <input type="text" id="q15" placeholder="your answer"></div>
+    </div>
+
+    <hr class="divider">
+    <div class="instruction">Questions 16–20 &nbsp;|&nbsp; Label the plan. Write <strong>NO MORE THAN TWO WORDS</strong> for each answer.</div>
+    <div class="map-placeholder">🗺️ Museum — First Floor Plan<br><small>(Refer to the map in your PDF)</small></div>
+    <div class="map-grid">
+      <div class="map-item"><label>(16)</label><input type="text" id="q16" placeholder="your answer"></div>
+      <div class="map-item"><label>(17)</label><input type="text" id="q17" placeholder="your answer"></div>
+      <div class="map-item"><label>(18)</label><input type="text" id="q18" placeholder="your answer"></div>
+      <div class="map-item"><label>(19)</label><input type="text" id="q19" placeholder="your answer"></div>
+      <div class="map-item"><label>(20)</label><input type="text" id="q20" placeholder="your answer"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PART 3 -->
+<div class="part">
+  <div class="part-header">
+    <h2>Part 3</h2>
+    <span>Questions 21–30</span>
+  </div>
+  <div class="part-body">
+
+    <div class="instruction">Questions 21–30 &nbsp;|&nbsp; Complete the notes. Write <strong>NO MORE THAN TWO WORDS</strong> for each answer.</div>
+
+    <strong style="display:block;margin-bottom:16px;font-family:'Playfair Display',serif;font-size:17px;">Research Methodology</strong>
+
+    <div class="question">
+      <div class="fill-line">• Use scientific method based on empirical evidence (= <span class="qnum-inline">21</span> <input type="text" id="q21" placeholder="your answer"> )</div>
+    </div>
+    <div class="question">
+      <div class="fill-line">• Find a research problem: e.g. lack of sleep has negative impact on <span class="qnum-inline">22</span> <input type="text" id="q22" placeholder="your answer"></div>
+    </div>
+    <div class="question">
+      <div class="fill-line">• An everyday problem e.g. research different memorization <span class="qnum-inline">23</span> <input type="text" id="q23" placeholder="your answer"></div>
+    </div>
+    <div class="question">
+      <div class="fill-line">• Conduct <span class="qnum-inline">24</span> <input type="text" id="q24" placeholder="your answer"> research</div>
+    </div>
+    <div class="question">
+      <div class="fill-line">• Make notes and create <span class="qnum-inline">25</span> <input type="text" id="q25" placeholder="your answer"></div>
+    </div>
+    <div class="question">
+      <div class="fill-line">• Standardize your <span class="qnum-inline">26</span> <input type="text" id="q26" placeholder="your answer"></div>
+    </div>
+    <div class="question">
+      <div class="fill-line">• Use different <span class="qnum-inline">27</span> <input type="text" id="q27" placeholder="your answer"></div>
+    </div>
+    <div class="question">
+      <div class="fill-line">• Stratified random sample — select from subsets with different <span class="qnum-inline">28</span> <input type="text" id="q28" placeholder="your answer"></div>
+    </div>
+    <div class="question">
+      <div class="fill-line">• Analyse results using <span class="qnum-inline">29</span> <input type="text" id="q29" placeholder="your answer"> methods</div>
+    </div>
+    <div class="question">
+      <div class="fill-line">• <span class="qnum-inline">30</span> <input type="text" id="q30" placeholder="your answer"> of paper is important</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PART 4 -->
+<div class="part">
+  <div class="part-header">
+    <h2>Part 4</h2>
+    <span>Questions 31–40</span>
+  </div>
+  <div class="part-body">
+
+    <div class="instruction">Questions 31–34 &nbsp;|&nbsp; Complete the table. Write <strong>ONE WORD AND/OR A NUMBER</strong> only.</div>
+
+    <table class="table-q">
+      <thead><tr><th>Cereal</th><th>MMT</th></tr></thead>
+      <tbody>
+        <tr><td><span class="qnum-inline">31</span> <input type="text" id="q31" placeholder="cereal name"></td><td>600</td></tr>
+        <tr><td><span class="qnum-inline">32</span> <input type="text" id="q32" placeholder="cereal name"></td><td>560</td></tr>
+        <tr><td>Coarse grain</td><td><span class="qnum-inline">33</span> <input type="text" id="q33" placeholder="number"></td></tr>
+        <tr><td>Cereal grown for <span class="qnum-inline">34</span> <input type="text" id="q34" placeholder="answer"></td><td>300</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="divider">
+    <div class="instruction">Questions 35–39 &nbsp;|&nbsp; Complete the summary. Write <strong>NO MORE THAN TWO WORDS</strong> for each answer.</div>
+
+    <div style="line-height:2.4;font-size:14.5px;">
+      Rice gives more <span class="qnum-inline">35</span> <input type="text" id="q35" style="border:none;border-bottom:2px solid var(--ink);background:transparent;font-size:14px;font-family:'Source Sans 3',sans-serif;padding:2px 6px;outline:none;width:130px;"> per hectare than other cereal crops and production has increased over 100% in recent years. Land area has only increased by 30% due to the need for wet land, limited by
+      <span class="qnum-inline">36</span> <input type="text" id="q36" style="border:none;border-bottom:2px solid var(--ink);background:transparent;font-size:14px;font-family:'Source Sans 3',sans-serif;padding:2px 6px;outline:none;width:130px;"> type and
+      <span class="qnum-inline">37</span> <input type="text" id="q37" style="border:none;border-bottom:2px solid var(--ink);background:transparent;font-size:14px;font-family:'Source Sans 3',sans-serif;padding:2px 6px;outline:none;width:130px;"> supply. The dry-land variety gives poorer yields and poorer
+      <span class="qnum-inline">38</span> <input type="text" id="q38" style="border:none;border-bottom:2px solid var(--ink);background:transparent;font-size:14px;font-family:'Source Sans 3',sans-serif;padding:2px 6px;outline:none;width:130px;">. Most rice is still grown
+      <span class="qnum-inline">39</span> <input type="text" id="q39" style="border:none;border-bottom:2px solid var(--ink);background:transparent;font-size:14px;font-family:'Source Sans 3',sans-serif;padding:2px 6px;outline:none;width:130px;">.
+    </div>
+
+    <hr class="divider">
+    <div class="instruction">Question 40 &nbsp;|&nbsp; Complete the diagram. Write <strong>ONE WORD ONLY</strong>.</div>
+    <div class="map-placeholder">🥧 Total Rice Production — Pie Chart<br><small>(Refer to the diagram in your PDF)</small></div>
+    <div class="map-item" style="max-width:300px;margin-top:8px;">
+      <label>(40)</label><input type="text" id="q40" placeholder="one word only">
+    </div>
+
+  </div>
+</div>
+
+<!-- SUBMIT -->
+<div class="submit-area">
+  <button id="submitBtn" onclick="submitTest()">Submit Answers</button>
+</div>
+
+<!-- RESULT PANEL -->
+<div id="result-panel">
+  <div class="result-header">
+    <h2>Your Results</h2>
+    <div class="score-big" id="scoreDisplay">—</div>
+    <div class="score-label">out of 40</div>
+    <div class="band-score" id="bandDisplay"></div>
+  </div>
+  <div class="result-body" id="answerReview"></div>
+</div>
+
+</main>
+
+<script>
+// ============================================================
+// ANSWER KEY — update after you listen to the audio!
+// ============================================================
+const ANSWERS = {
+  // Part 1 — radio
+  q1: "C", q2: "B", q3: "A", q4: "C", q5: "B",
+  q6: "A", q7: "B", q8: "C", q9: "A", q10: "B",
+  // Part 2 — fill
+  q11: "", q12: "", q13: "", q14: "", q15: "",
+  q16: "", q17: "", q18: "", q19: "", q20: "",
+  // Part 3 — fill
+  q21: "", q22: "", q23: "", q24: "", q25: "",
+  q26: "", q27: "", q28: "", q29: "", q30: "",
+  // Part 4 — fill
+  q31: "", q32: "", q33: "", q34: "",
+  q35: "", q36: "", q37: "", q38: "", q39: "", q40: ""
+};
+
+const LABELS = {
+  q1:"1. Nadia bought at bookshop", q2:"2. Thomas interested in play about",
+  q3:"3. Couple discussing", q4:"4. Nadia's coffee", q5:"5. Muffin type",
+  q6:"6. Tower of London", q7:"7. The Wheel", q8:"8. Westminster",
+  q9:"9. British Museum", q10:"10. Buckingham Palace",
+  q11:"11. Museum opens Thursday", q12:"12. Multi-media guide cost",
+  q13:"13. Coats and bags location", q14:"14. Package storage cost",
+  q15:"15. Tea location", q16:"16. Map label", q17:"17. Map label",
+  q18:"18. Map label", q19:"19. Map label", q20:"20. Map label",
+  q21:"21. Empirical evidence =", q22:"22. Negative impact on",
+  q23:"23. Memorization ___", q24:"24. Type of research",
+  q25:"25. Make notes and create", q26:"26. Standardize your",
+  q27:"27. Different ___", q28:"28. Different ___", q29:"29. Analysis methods",
+  q30:"30. ___ of paper", q31:"31. Cereal (600 MMT)", q32:"32. Cereal (560 MMT)",
+  q33:"33. Coarse grain MMT", q34:"34. Grown for ___",
+  q35:"35. More ___ per hectare", q36:"36. Land type", q37:"37. ___ supply",
+  q38:"38. Poorer ___", q39:"39. Rice grown ___", q40:"40. Diagram label"
+};
+
+function getAnswer(key) {
+  const radioGroup = document.querySelector(`input[name="${key}"]:checked`);
+  if (radioGroup) return radioGroup.value;
+  const textField = document.getElementById(key);
+  if (textField) return textField.value.trim().toLowerCase();
+  return "";
+}
+
+function bandScore(raw) {
+  if (raw >= 39) return "Band 9.0";
+  if (raw >= 37) return "Band 8.5";
+  if (raw >= 35) return "Band 8.0";
+  if (raw >= 33) return "Band 7.5";
+  if (raw >= 30) return "Band 7.0";
+  if (raw >= 27) return "Band 6.5";
+  if (raw >= 23) return "Band 6.0";
+  if (raw >= 20) return "Band 5.5";
+  if (raw >= 16) return "Band 5.0";
+  return "Band 4.5";
+}
+
+function submitTest() {
+  let score = 0;
+  let html = "";
+  const hasAnswerKey = Object.values(ANSWERS).some(v => v !== "");
+
+  for (let i = 1; i <= 40; i++) {
+    const key = "q" + i;
+    const user = getAnswer(key);
+    const correct = ANSWERS[key].toLowerCase();
+    const label = LABELS[key] || ("Q" + i);
+
+    let isCorrect = false;
+    let tag = "";
+
+    if (!user) {
+      tag = `<span class="tag-skip">Skipped</span>`;
+    } else if (!correct) {
+      tag = `<span class="tag-skip">No key</span>`;
+    } else if (user === correct) {
+      isCorrect = true;
+      score++;
+      tag = `<span class="tag-correct">✓ Correct</span>`;
+    } else {
+      tag = `<span class="tag-wrong">✗ Wrong</span>`;
+    }
+
+    html += `<div class="answer-row">
+      <span class="qn">${i}.</span>
+      <span class="your">${label}<br><small>Your answer: <strong>${user || "—"}</strong>${correct ? ` &nbsp; Correct: <span class="correct-ans">${ANSWERS[key]}</span>` : ""}</small></span>
+      ${tag}
+    </div>`;
+  }
+
+  document.getElementById("scoreDisplay").textContent = score + "/40";
+  document.getElementById("bandDisplay").textContent = hasAnswerKey ? bandScore(score) : "Add answers to ANSWERS key in script.js to see band score";
+  document.getElementById("answerReview").innerHTML = html;
+  const panel = document.getElementById("result-panel");
+  panel.style.display = "block";
+  panel.scrollIntoView({ behavior: "smooth" });
+}
+</script>
+</body>
+</html>
